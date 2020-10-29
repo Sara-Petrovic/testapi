@@ -27,7 +27,8 @@ class Database
     function ExecuteQuery($query){
         if($this->result = $this->dblink->query($query)){
             if(isset($this->result->num_rows)){
-                
+           
+
             }
         }
     }
