@@ -34,7 +34,6 @@ class Database
             }
             if(isset($this->result->affected_rows)){
                 $this->affected = $this->result->affected_rows;
-
             }
             return true;
         }else{
@@ -69,7 +68,7 @@ class Database
             $q.='('.$rows.')';
         }
         $q.=" VALUES($query_values)";
-        // echo($q);
+        echo($q);
         if($this->ExecuteQuery($q)){
             return true;
         }else{
@@ -77,6 +76,7 @@ class Database
         }
     }
     function update($table, $id, $keys,$values){
+       
         $query_values ="";
         $set_query = array();
         for($i =0; $i<sizeof($keys); $i++){
@@ -84,7 +84,8 @@ class Database
         }
         $query_values = implode(",", $set_query);  
         $q = "UPDATE $table SET $query_values WHERE id=$id";
-        if($this->ExecuteQuery($q) && $this->affected>0){
+        if($this->ExecuteQuery($q) ){
+            // izbacila u if-u && $this->affected>0
             return true;
         }else{
             return false;

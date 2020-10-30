@@ -11,6 +11,15 @@ if (isset($_POST["posalji"]) && $_POST["posalji"] = "Posalji zahtev") {
         }
         $_POST = array();
         exit();
+    } elseif ($_POST["kategorija_naziv"] != null) {
+        $niz = ["kategorija" => "'" . $_POST["kategorija_naziv"] . "'"];
+        if ($mydb->insert("kategorije", "kategorija", $niz)) {
+            echo "vrednosti ubacene!";
+        } else {
+            echo "vrednosti nisu ubacene!";
+        }
+        $_POST = array();
+        exit();
     } elseif ($_POST["brisanje"] != null && $_POST["odabir_tabele"] != null) {
         $tabela = $_POST["odabir_tabele"];
         $id = "id";
@@ -38,6 +47,30 @@ if (isset($_POST["posalji"]) && $_POST["posalji"] = "Posalji zahtev") {
             echo "Novosti: " . "<br>";
             while ($red = $mydb->getResult()->fetch_object()) {
                 echo "id novosti: " . $red->id . ", naslov: " . $red->naslov . ", <br>" . "tekst: " . $red->tekst . ", datum i vreme: " . $red->datumvreme . ", kategorija_id: " . $red->kategorija_id . "<br>";
+            }
+            $_POST = array();
+            exit();
+        } else if ($_POST["kategorija_id"] != null && $_POST["kategorija_naziv_put"]) {
+            $tabela = $_POST["odabir_tabele"];
+            $id = $_POST["kategorija_id"];
+            $keys = (array)("kategorija");
+            $values = (array)("'" . $_POST["kategorija_naziv_put"] . "'");
+            if ($mydb->update($tabela, $id , $keys,$values )) {
+                echo "kategorija izmenjena";
+            } else {
+                echo "greska prilikom izmene kategorije";
+            }
+            $_POST = array();
+            exit();
+        }else if ($_POST["novosti_id"] != null && $_POST["kategorija_naziv_put"]) {
+            $tabela = $_POST["odabir_tabele"];
+            $id = $_POST["kategorija_id"];
+            $keys = (array)("kategorija");
+            $values = (array)("'" . $_POST["kategorija_naziv_put"] . "'");
+            if ($mydb->update($tabela, $id , $keys,$values )) {
+                echo "kategorija izmenjena";
+            } else {
+                echo "greska prilikom izmene kategorije";
             }
             $_POST = array();
             exit();
