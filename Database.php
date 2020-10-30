@@ -84,6 +84,7 @@ class Database
         }
         $query_values = implode(",", $set_query);  
         $q = "UPDATE $table SET $query_values WHERE id=$id";
+        //echo $q;
         if($this->ExecuteQuery($q) ){
             // izbacila u if-u && $this->affected>0
             return true;

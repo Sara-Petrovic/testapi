@@ -62,15 +62,16 @@ if (isset($_POST["posalji"]) && $_POST["posalji"] = "Posalji zahtev") {
             }
             $_POST = array();
             exit();
-        }else if ($_POST["novosti_id"] != null && $_POST["kategorija_naziv_put"]) {
+        }else if ($_POST["novosti_id"] != null && $_POST["naslov_novosti_put"] != null && $_POST["tekst_novosti_put"] != null && $_POST["kategorija_odabir_put"] != null) {
+            $values = [ "'" .$_POST["naslov_novosti_put"]. "'" , "'" .$_POST["tekst_novosti_put"]. "'" ,"NOW()",  "'" .$_POST["kategorija_odabir_put"]. "'"];
+            $keys = ["naslov","tekst","datumvreme","kategorija_id"];
             $tabela = $_POST["odabir_tabele"];
-            $id = $_POST["kategorija_id"];
-            $keys = (array)("kategorija");
-            $values = (array)("'" . $_POST["kategorija_naziv_put"] . "'");
+            $id = $_POST["novosti_id"];
+
             if ($mydb->update($tabela, $id , $keys,$values )) {
-                echo "kategorija izmenjena";
+                echo "novost izmenjena";
             } else {
-                echo "greska prilikom izmene kategorije";
+                echo "greska prilikom izmene novosti";
             }
             $_POST = array();
             exit();
