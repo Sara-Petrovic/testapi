@@ -59,6 +59,7 @@ class Database
             $q.=' ORDER BY '.$order;
         }
 
+        //echo $q;
         $this->ExecuteQuery($q);
     }
     function insert($table="novosti",$rows="naslov, tekst, datumvreme, kategorija_id", $values){
